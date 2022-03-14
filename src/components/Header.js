@@ -11,7 +11,17 @@ import { logout } from "../actions/userActions";
 
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  console.log(userLogin);
+  let userInfo = null;
+  // const { userInfo } = userLogin;
+  try {
+    userInfo = userLogin.userInfo;
+    if (userInfo.length === 0) {
+      userInfo = null;
+    }
+  } catch (error) {
+    console.log("error");
+  }
   const dispatch = useDispatch();
   const logoutHandler = () => {
     // console.log("logout successful");

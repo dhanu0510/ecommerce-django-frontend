@@ -15,19 +15,17 @@ const RegisterScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
-
+  console.log(password);
   const dispatch = useDispatch();
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const userRegister = useSelector((state) => state.userRegister);
   const { error, loading, userInfo } = userRegister;
-  console.log(userRegister);
 
   useEffect(() => {
     try {
-      if (userInfo["access"]) {
-        console.log(userInfo["access"]);
+      if (userInfo) {
         history.push(redirect);
       }
     } catch (error) {
