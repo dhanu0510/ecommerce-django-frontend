@@ -4,17 +4,16 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
-// import { createOrder } from "../actions/orderActions";
-// import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { createOrder } from "../actions/orderActions";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 function PlaceOrderScreen({ history }) {
-  // const orderCreate = useSelector((state) => state.orderCreate);
-  // const { order, error, success } = orderCreate;
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, error, success } = orderCreate;
 
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  // console.log(cart);
   cart.itemsPrice = cart.cartItems
     .reduce((acc, item) => acc + item.price * item.quantity, 0)
     .toFixed(2);
@@ -31,26 +30,25 @@ function PlaceOrderScreen({ history }) {
     history.push("/payment");
   }
 
-  // useEffect(() => {
-  //   if (success) {
-  //     history.push(`/order/${order._id}`);
-  //     dispatch({ type: ORDER_CREATE_RESET });
-  //   }
-  // }, [success, history]);
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [success, history]);
 
   const placeOrder = () => {
-    // dispatch(
-    //   createOrder({
-    //     orderItems: cart.cartItems,
-    //     shippingAddress: cart.shippingAddress,
-    //     paymentMethod: cart.paymentMethod,
-    //     itemsPrice: cart.itemsPrice,
-    //     shippingPrice: cart.shippingPrice,
-    //     taxPrice: cart.taxPrice,
-    //     totalPrice: cart.totalPrice,
-    //   })
-    // );
-    console.log("ORDERED");
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   return (
@@ -151,9 +149,9 @@ function PlaceOrderScreen({ history }) {
                 </Row>
               </ListGroup.Item>
 
-              {/* <ListGroup.Item>
+              <ListGroup.Item>
                 {error && <Message variant="danger">{error}</Message>}
-              </ListGroup.Item> */}
+              </ListGroup.Item>
 
               <ListGroup.Item>
                 <Button
