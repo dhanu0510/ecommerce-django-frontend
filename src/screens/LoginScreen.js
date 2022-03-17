@@ -19,12 +19,10 @@ const LoginScreen = ({ location, history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
-  console.log(userLogin);
 
   useEffect(() => {
     try {
       if (userInfo["access"]) {
-        console.log(userInfo["access"]);
         history.push(redirect);
       }
     } catch (error) {
