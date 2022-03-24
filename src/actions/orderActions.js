@@ -178,6 +178,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
 
 export const listMyOrders = () => async (dispatch, getState) => {
   try {
+    console.log("list my orders");
     dispatch({
       type: ORDER_LIST_MY_REQUEST,
     });
