@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalButton } from "react-paypal-button-v2";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import {
@@ -23,6 +23,7 @@ function OrderScreen({ match, history }) {
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;
+  console.log(order);
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
@@ -43,7 +44,7 @@ function OrderScreen({ match, history }) {
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.src =
-      "https://www.paypal.com/sdk/js?client-id=AeDXja18CkwFUkL-HQPySbzZsiTrN52cG13mf9Yz7KiV2vNnGfTDP0wDEN9sGlhZHrbb_USawcJzVDgn";
+      "https://www.paypal.com/sdk/js?client-id=Abh-VSc3nwwvIJMQK4u30LheqHLmo_87bJc8Ypl_lLXuz4eAigpwdOmIvAqj2ixqLpvK8euzcEKZw2Xf";
     script.async = true;
     script.onload = () => {
       setSdkReady(true);
@@ -74,7 +75,6 @@ function OrderScreen({ match, history }) {
       }
     }
   }, [dispatch, order, orderId, successPay, successDeliver]);
-
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
   };
@@ -155,9 +155,12 @@ function OrderScreen({ match, history }) {
                             {item.name}
                           </Link>
                         </Col>
+                        <Col>
+                          <h6>Vendor : {item.vendor}</h6>
+                        </Col>
 
                         <Col md={4}>
-                          {item.qty} X ${item.price} = $
+                          {item.qty} X ₹{item.price} = ₹
                           {(item.qty * item.price).toFixed(2)}
                         </Col>
                       </Row>
@@ -179,28 +182,28 @@ function OrderScreen({ match, history }) {
               <ListGroup.Item>
                 <Row>
                   <Col>Items:</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>₹{order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping:</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>₹{order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Tax:</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>₹{order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>₹{order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -210,11 +213,15 @@ function OrderScreen({ match, history }) {
 
                   {!sdkReady ? (
                     <Loader />
-                  ) : // <PayPalButton
-                  //   amount={order.totalPrice}
-                  //   onSuccess={successPaymentHandler}
-                  // />
-                  null}
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                      onError={successPaymentHandler}
+                      onCancel={successPaymentHandler}
+                      currency="USD"
+                    />
+                  )}
                 </ListGroup.Item>
               )}
             </ListGroup>

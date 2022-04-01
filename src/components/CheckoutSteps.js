@@ -9,9 +9,9 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
     <Nav className="justify-content-center mb-4">
       <Nav.Item>
         {step1 ? (
-          <Link to="/login">
-            <Nav.Link>Login</Nav.Link>
-          </Link>
+          <Nav.Link>
+            <Link to="/login">Login</Link>
+          </Nav.Link>
         ) : (
           <Nav.Link disabled>Login</Nav.Link>
         )}
@@ -19,9 +19,9 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
 
       <Nav.Item>
         {step2 ? (
-          <Link to="/shipping">
-            <Nav.Link>Shipping</Nav.Link>
-          </Link>
+          <Nav.Link>
+            <Link to="/shipping">Shipping</Link>
+          </Nav.Link>
         ) : (
           <Nav.Link disabled>Shipping</Nav.Link>
         )}
@@ -29,9 +29,9 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
 
       <Nav.Item>
         {step3 ? (
-          <Link to="/payment">
-            <Nav.Link>Payment</Nav.Link>
-          </Link>
+          <Nav.Link>
+            <Link to="/payment">Payment</Link>
+          </Nav.Link>
         ) : (
           <Nav.Link disabled>Payment</Nav.Link>
         )}
@@ -39,9 +39,9 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
 
       <Nav.Item>
         {step4 ? (
-          <Link to="/placeorder">
-            <Nav.Link>Place Order</Nav.Link>
-          </Link>
+          <Nav.Link>
+            <Link to="/placeorder">Place Order</Link>
+          </Nav.Link>
         ) : (
           <Nav.Link disabled>Place Order</Nav.Link>
         )}

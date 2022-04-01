@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import SearchBox from "./SearchBox";
 // style
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 
@@ -35,8 +36,10 @@ const Header = () => {
             <Navbar.Brand>BrainyBeam Shop</Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <SearchBox />
+            <Nav className="ms-auto ml-2">
               <Link to="/cart">
                 <Navbar.Brand>
                   <i className="fas fa-shopping-cart"></i> Cart
@@ -57,6 +60,21 @@ const Header = () => {
                     <i className="fas fa-user"></i> Login
                   </Navbar.Brand>
                 </Link>
+              )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminmenue">
+                  <NavDropdown.Item>
+                    <Link to="/admin/userlist">Users</Link>
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item>
+                    <Link to="/admin/productlist">Products</Link>
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item>
+                    <Link to="/admin/orderlist">Orders</Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>
