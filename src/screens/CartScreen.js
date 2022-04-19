@@ -45,7 +45,7 @@ const CartScreen = ({ match, location, history }) => {
     <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
-        {cartItems.length == 0 ? (
+        {cartItems.length === 0 ? (
           <Message variant="info">
             Your cart is empty <Link to="/">Continue Shopping</Link>
           </Message>
@@ -116,7 +116,7 @@ const CartScreen = ({ match, location, history }) => {
               <Button
                 type="button"
                 className="btn-block"
-                disabled={cartItems.length == 0}
+                disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
                 Proceed To checkout

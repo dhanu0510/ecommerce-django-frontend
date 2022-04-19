@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Button, Form, Card } from "react-bootstrap";
+import { Col, Row, Button, Form } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
