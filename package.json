@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "proxy": "https://ecommerce-django-r.herokuapp.com",
+  "proxy": "http://127.0.0.1:8000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

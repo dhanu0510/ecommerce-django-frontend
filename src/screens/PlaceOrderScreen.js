@@ -9,7 +9,7 @@ import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 function PlaceOrderScreen({ history }) {
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, error, success } = orderCreate;
+  const { error, success } = orderCreate;
 
   const dispatch = useDispatch();
 
@@ -32,10 +32,12 @@ function PlaceOrderScreen({ history }) {
 
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`);
+      alert("Order placed successfully!");
+      history.push("/");
+      // history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [success, history, order._id, dispatch]);
+  }, [success, history, dispatch]);
 
   const placeOrder = () => {
     dispatch(

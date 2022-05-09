@@ -2,7 +2,7 @@
 import { HashRouter as Router, Route } from "react-router-dom";
 
 // styles
-import "./bootstrap2.min.css";
+import "./bootstrap7.min.css";
 import { Container } from "react-bootstrap";
 
 // components
